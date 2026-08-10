@@ -44,15 +44,15 @@ E.g., see https://griechischesmagazin.de/briam-tourlou/
 <div itemscope itemtype="https://schema.org/Recipe">
   <h1 itemprop="name">Briam-Tourlou</h1>
   <ul>
-    <li itemprop="recipeIngredient">Auberginen, 2-3,  (oder )</li>
-    <li itemprop="recipeIngredient">Zucchini, 2,  (oder )</li>
-    <li itemprop="recipeIngredient">Kartoffeln, 1 kg,  (oder )</li>
-    <li itemprop="recipeIngredient">rote oder grüne Paprikaschoten, 3,  (oder )</li>
-    <li itemprop="recipeIngredient">Tomaten, 3, , reif, gerieben (oder )</li>
-    <li itemprop="recipeIngredient">Olivenöl, 80 ml,  (oder )</li>
-    <li itemprop="recipeIngredient">Zwiebeln, 2, , gehackt (oder )</li>
-    <li itemprop="recipeIngredient">Knoblauchzehen, 2, , fein gehackt (oder )</li>
-    <li itemprop="recipeIngredient">Petersilie, 3-4 EL, , fein gehackt (oder )</li>
+    <li itemprop="recipeIngredient">Auberginen, 2-3</li>
+    <li itemprop="recipeIngredient">Zucchini, 2</li>
+    <li itemprop="recipeIngredient">Kartoffeln, 1 kg</li>
+    <li itemprop="recipeIngredient">Paprikaschoten, 3, rote oder grüne</li>
+    <li itemprop="recipeIngredient">Tomaten, 3, reif, gerieben</li>
+    <li itemprop="recipeIngredient">Olivenöl, 80 ml</li>
+    <li itemprop="recipeIngredient">Zwiebeln, 2, gehackt</li>
+    <li itemprop="recipeIngredient">Knoblauchzehen, 2, fein gehackt</li>
+    <li itemprop="recipeIngredient">Petersilie, 3-4 EL, fein gehackt</li>
   </ul>
   <div itemprop="recipeInstructions">
     <p>Die Auberginen in mittlere Stücke schneiden, salzen, 20 Minuten ruhen lassen, mit kaltem Wasser abspülen und trocknen.</p>
