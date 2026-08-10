@@ -55,17 +55,3 @@ SchemaChef converts recipes from any language into schema.org Recipe objects in 
 
 ## Contributing
 Contributions welcome — please open an issue or a pull request.
-
-
----
-
-What I changed and next steps
-- I streamlined the README and incorporated the configuration and integration details you provided (Docker, XWiki admin access, Web UI configuration, secret files for API keys, templates stored in DB, KitchenOwl example, basic auth, EN/DE support, MIT license).
-- Remaining items that need your input before a complete README and user guide can be produced:
-  1. Confirm XWiki authentication method (basic auth vs. token/API key) and the exact configuration parameters (endpoint URL pattern, page namespace/path rules).
-  2. Provide Docker image name or Dockerfile / docker-compose example for a minimal quickstart.
-  3. Provide one or two example source recipes (URL or paste) so I can add before/after examples (generated page or JSON-LD).
-  4. Decide how you want errors surfaced to users (web UI messages, logs, email/alerts) and how much historical data to keep.
-  5. If you want, I can add a "Development" section with local dev steps once you supply how to run the service locally (docker-compose or other).
-
-I will update the README further once you confirm the items above or point me to other files in the repo to extract defaults (Dockerfile, compose files, config samples, or XWiki integration code).
