@@ -1,0 +1,44 @@
+secrets:
+  xwiki_user:
+    file: ./secrets/xwiki_user.txt
+  xwiki_password:
+    file: ./secrets/xwiki_password.txt
+  app_secret_key:
+    file: ./secrets/app_secret_key.txt
+  api_key_anthropic:
+    file: ./secrets/api_key_anthropic.txt
+  api_key_openai:
+    file: ./secrets/api_key_openai.txt
+  api_key_gemini:
+    file: ./secrets/api_key_gemini.txt
+
+services:
+  schemachef:
+    build: .
+    container_name: schemachef
+    restart: unless-stopped
+    secrets:
+      - xwiki_user
+      - xwiki_password
+      - app_secret_key
+      - api_key_anthropic
+      - api_key_openai
+      - api_key_gemini
+    environment:
+      # Aendert sich selten, soll nicht ueber die Web-UI manipulierbar
+      # sein - deshalb hier statt in der DB/Admin-UI. Echte Werte NICHT
+      # hier eintragen (diese Datei ist fuer Git gedacht) - stattdessen
+      # in einer lokalen, von .gitignore erfassten .env-Datei
+      # (Docker Compose laedt sie automatisch, gleiches Verzeichnis):
+      #   XWIKI_BASE=https://xwiki.deine-domain.tld
+      #   XWIKI_TARGET_SPACE=Dein/Zielraum
+      XWIKI_BASE: "${XWIKI_BASE:-https://xwiki.example.com}"
+      XWIKI_TARGET_SPACE: "${XWIKI_TARGET_SPACE:-Rezepte/Strukturiert}"
+    ports:
+      - "${PORT:-5000}:5000"
+    volumes:
+      - ./data:/data
+    # Bewusst knapp bemessen - Single-User, seltene Nutzung.
+    # Bei Bedarf in Synology Container Manager anpassen.
+    mem_limit: 256m
+    # cpus: 0.5

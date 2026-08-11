@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Verlauf') }}{% endblock %}
+{% block content %}
+<h2>{{ _('Verlauf') }}</h2>
+{% if not sync_available %}
+<p class="meta" style="color:var(--gold);">{{ _('XWiki-Abgleich gerade nicht verfuegbar - Status koennte veraltet sein.') }}</p>
+{% endif %}
+{% if not imports %}
+<p class="meta">{{ _('Noch keine Importe.') }}</p>
+{% else %}
+<table>
+  <tr><th>{{ _('Zeit') }}</th><th>{{ _('Titel') }}</th><th>{{ _('Status') }}</th><th>{{ _('Link') }}</th></tr>
+  {% for row in imports %}
+  <tr>
+    <td>{{ row['created_at'] }}</td>
+    <td {% if row['still_exists'] == false %}style="text-decoration:line-through;color:var(--muted);"{% endif %}>{{ row['title'] or row['url'] }}</td>
+    <td>
+      {% if row['still_exists'] == false %}
+        <span style="color:var(--error);font-weight:600;">{{ _('geloescht (nicht mehr in XWiki)') }}</span>
+      {% else %}
+        {{ row['status'] }}
+      {% endif %}
+      {% if row['error'] %}<br><span class="meta">{{ row['error'] }}</span>{% endif %}
+    </td>
+    <td>{% if row['xwiki_url'] and row['still_exists'] != false %}<a href="{{ row['xwiki_url'] }}">{{ _('öffnen') }}</a>{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

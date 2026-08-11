@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Rezept pruefen') }}{% endblock %}
+{% block extra_style %}
+<style>
+  .ingredient-card {
+    margin-bottom: 1.1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ingredient-fields {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 0.6rem;
+    margin: 0.5rem 0;
+  }
+  @media (max-width: 480px) {
+    .ingredient-fields { grid-template-columns: 1fr; }
+  }
+  textarea.step-input {
+    resize: none;
+    overflow: hidden;
+    min-height: 2.6rem;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h2>{{ recipe.title_translated }}</h2>
+<p class="meta">
+  {{ _('Quelle') }}: <a href="{{ url }}" target="_blank" rel="noopener">{{ recipe.site_name or url }}</a> &middot;
+  {{ _('Extraktion') }}: {{ _('JSON-LD (strukturierte Seitendaten)') if source == "jsonld" else _('KI-Extraktion') }}
+</p>
+
+<form method="post" action="{{ url_for('confirm') }}">
+  <input type="hidden" name="url" value="{{ url }}">
+  <input type="hidden" name="site_name" value="{{ recipe.site_name or '' }}">
+
+  <label for="title_translated">{{ _('Titel') }}</label>
+  <input type="text" id="title_translated" name="title_translated" value="{{ recipe.title_translated }}" required>
+
+  <h3>{{ _('Zutaten') }}</h3>
+  {% for ing in recipe.ingredients %}
+  <div class="ingredient-card">
+    <label>{{ _('Original') }}</label>
+    <input type="text" value="{{ ing.original }}" readonly>
+
+    <div class="ingredient-fields">
+      <div>
+        <label>{{ _('Name') }}</label>
+        <input type="text" name="ingredient_name" value="{{ ing.name_translated }}">
+      </div>
+      <div>
+        <label>{{ _('Details') }}</label>
+        <input type="text" name="ingredient_details" value="{{ ing.details_translated or '' }}" placeholder="{{ _('gerieben, reif ...') }}">
+      </div>
+      <div>
+        <label>{{ _('Menge') }}</label>
+        <input type="text" name="ingredient_amount" value="{{ ing.amount_translated }}">
+      </div>
+    </div>
+
+    <label>
+      {{ _('Alternative') }}
+      {% if ing.bezugsquelle %}<span class="badge">{{ ing.bezugsquelle }}</span>{% endif %}
+    </label>
+    <input type="text" name="ingredient_alternative" value="{{ ing.alternative or '' }}">
+  </div>
+  {% endfor %}
+
+  <h3>{{ _('Zubereitung') }}</h3>
+  {% for step in recipe.steps_translated %}
+  <div class="step-row">
+    <label>{{ _('Schritt %(n)s', n=loop.index) }}</label>
+    <textarea class="step-input" name="step_translated" rows="1">{{ step }}</textarea>
+  </div>
+  {% endfor %}
+
+  <h3>{{ _('Import') }}</h3>
+  <label for="slug">{{ _('Seitenname (Slug)') }}</label>
+  <input type="text" id="slug" name="slug" value="{{ slug }}" required>
+  {% if slug_is_duplicate %}
+  <p class="meta" style="color:var(--gold);font-weight:600;">{{ _('Hinweis: Es existiert bereits eine Seite mit diesem Titel - automatisch durchnummeriert.') }}</p>
+  {% endif %}
+  <p class="meta">{{ _('Manuelle Aenderung moeglich - bei Kollision ohne "Ueberschreiben" wird automatisch neu durchnummeriert.') }}</p>
+
+  <div class="actions" style="margin-top:0.8rem;">
+    <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:var(--ink)">
+      <input type="checkbox" name="force_overwrite" style="width:auto">
+      {{ _('Vorhandene Seite ueberschreiben') }}
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="submit">{{ _('In XWiki importieren') }}</button>
+    <a class="btn btn-ghost" href="{{ url_for('index') }}">{{ _('Abbrechen') }}</a>
+  </div>
+</form>
+
+<script>
+  document.querySelectorAll('.step-input').forEach(function (el) {
+    function resize() { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
+    el.addEventListener('input', resize);
+    resize();
+  });
+</script>
+{% endblock %}

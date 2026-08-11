@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Neues Rezept') }}{% endblock %}
+{% block content %}
+<p class="meta">
+  {{ _('Rezept-URL eingeben. Fremdsprachige Rezepte werden automatisch in die Zielsprache uebersetzt, unuebliche Zutaten erhalten Alternativvorschlaege (Asia-Markt/Metro). Vor dem Import kannst du alles pruefen und bearbeiten.') }}
+</p>
+<form method="post" action="{{ url_for('extract') }}">
+  <label for="url">{{ _('Rezept-URL') }}</label>
+  <input type="url" id="url" name="url" placeholder="https://…" required autofocus>
+
+  <label for="target_language" style="margin-top:0.8rem;">{{ _('Zielsprache') }}</label>
+  <input type="text" id="target_language" name="target_language" list="target_language_options" value="{{ target_language }}">
+  <datalist id="target_language_options">
+    <option value="Deutsch">
+    <option value="English">
+    <option value="Français">
+    <option value="Español">
+    <option value="Italiano">
+    <option value="Português">
+    <option value="Nederlands">
+    <option value="Polski">
+    <option value="Türkçe">
+    <option value="Ελληνικά">
+    <option value="Русский">
+    <option value="日本語">
+  </datalist>
+  <p class="meta">{{ _('Freitext, die Liste ist nur eine Tipphilfe. Letzte Auswahl wird gemerkt.') }}</p>
+
+  <div class="actions">
+    <button type="submit">{{ _('Rezept extrahieren') }}</button>
+  </div>
+</form>
+{% endblock %}

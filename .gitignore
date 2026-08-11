@@ -1,0 +1,17 @@
+# Echte Zugangsdaten - niemals committen
+secrets/*.txt
+
+# Echte Instanz-Werte (Domain, Zielraum) - siehe compose.yaml, lokale
+# .env ueberschreibt die generischen Fallback-Werte
+.env
+.env.*
+
+# Laufzeitdaten (SQLite inkl. WAL/Journal-Dateien), Platzhalter bleibt
+data/*
+!data/.gitkeep
+
+# Build-Artefakte
+__pycache__/
+*.pyc
+translations/**/*.mo
+translations/messages.pot

@@ -1,0 +1,436 @@
+# English translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-08-11 10:47+0000\n"
+"PO-Revision-Date: 2026-08-11 08:06+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app/main.py:52
+#, python-format
+msgid "Modelle fuer %(provider)s konnten nicht geladen werden: %(error)s"
+msgstr "Could not load models for %(provider)s: %(error)s"
+
+#: app/main.py:83
+#, python-format
+msgid "Extraktion fehlgeschlagen: %(error)s"
+msgstr "Extraction failed: %(error)s"
+
+#: app/main.py:135
+#, python-format
+msgid "Import fehlgeschlagen: %(error)s"
+msgstr "Import failed: %(error)s"
+
+#: app/main.py:139
+#, python-format
+msgid "Rezept '%(title)s' importiert."
+msgstr "Recipe '%(title)s' imported."
+
+#: app/main.py:184
+msgid "Einstellungen gespeichert."
+msgstr "Settings saved."
+
+#: app/main.py:239
+msgid "Modell-Listen aktualisiert."
+msgstr "Model lists updated."
+
+#: app/main.py:241
+msgid "Kein API-Key als Secret hinterlegt - siehe secrets/README.md."
+msgstr "No API key configured as a secret - see secrets/README.md."
+
+#: app/templates/admin.html:2 app/templates/admin.html:50
+#: app/templates/base.html:207
+msgid "Einstellungen"
+msgstr "Settings"
+
+#: app/templates/admin.html:52
+msgid "Diese Seite ist nicht selbst abgesichert - Zugriffsschutz erfolgt ueber den vorgeschalteten Reverse Proxy (oauth2-proxy/Keycloak)."
+msgstr "This page is not secured on its own - access protection is handled by the upstream reverse proxy (oauth2-proxy/Keycloak)."
+
+#: app/templates/admin.html:53
+msgid "Jeder Bereich unten wird unabhaengig gespeichert - ein Klick auf \"Speichern\" wirkt nur auf diesen einen Bereich."
+msgstr "Each section below saves independently - clicking \"Save\" only affects that one section."
+
+#: app/templates/admin.html:60
+msgid "XWiki-Ziel"
+msgstr "XWiki target"
+
+#: app/templates/admin.html:62
+msgid "Base-URL"
+msgstr "Base URL"
+
+#: app/templates/admin.html:62
+msgid "und Zielraum"
+msgstr "and target space"
+
+#: app/templates/admin.html:62
+msgid "sind in"
+msgstr "are defined in"
+
+#: app/templates/admin.html:62
+msgid "definiert."
+msgstr "."
+
+#: app/templates/admin.html:66
+msgid "LLM-Anbieter"
+msgstr "LLM provider"
+
+#: app/templates/admin.html:71
+msgid "Aktiver Anbieter"
+msgstr "Active provider"
+
+#: app/templates/admin.html:73 app/templates/admin.html:74
+#: app/templates/admin.html:75
+msgid "kein API-Key hinterlegt"
+msgstr "no API key configured"
+
+#: app/templates/admin.html:79
+msgid "API-Keys sind Docker Secrets"
+msgstr "API keys are Docker secrets"
+
+#: app/templates/admin.html:79
+#, fuzzy
+msgid "Aenderung braucht"
+msgstr "A change requires rebuild/recreate."
+
+#: app/templates/admin.html:79
+msgid "Rebuild + Recreate"
+msgstr "rebuild + recreate"
+
+#: app/templates/admin.html:79
+msgid "da sich der Dateiinhalt im Image aendert."
+msgstr "since the file content changes inside the image."
+
+#: app/templates/admin.html:85
+msgid "Modell"
+msgstr "Model"
+
+#: app/templates/admin.html:89
+msgid "aktuell, nicht in geladener Liste"
+msgstr "current, not in loaded list"
+
+#: app/templates/admin.html:96
+#, fuzzy
+msgid "Modell-Liste neu laden"
+msgstr "Load model list from active provider"
+
+#: app/templates/admin.html:97 app/templates/admin.html:235
+msgid "zuletzt geladen am"
+msgstr "last loaded on"
+
+#: app/templates/admin.html:97 app/templates/admin.html:234
+msgid "noch nie"
+msgstr "never"
+
+#: app/templates/admin.html:101
+msgid "Wird beim Oeffnen dieser Seite automatisch fuer den aktiven Anbieter aktualisiert. Optionen haengen vom oben gewaehlten Anbieter ab."
+msgstr "Automatically refreshed for the active provider when this page opens. Options depend on the provider chosen above."
+
+#: app/templates/admin.html:106 app/templates/admin.html:142
+#: app/templates/admin.html:177 app/templates/admin.html:212
+msgid "Speichern"
+msgstr "Save"
+
+#: app/templates/admin.html:112
+#, fuzzy
+msgid "Zutatenformat"
+msgstr "Ingredient line format"
+
+#: app/templates/admin.html:113
+msgid "Wie eine Zutat auf der finalen Seite erscheint - Standard entspricht KitchenOwls manuellem Eingabeformat \"Name, Menge\"."
+msgstr "How an ingredient appears on the final page - the default matches KitchenOwl's manual entry format \"name, amount\"."
+
+#: app/templates/admin.html:115
+msgid "Template-Logik (Variablen und optionale Bausteine)"
+msgstr "Template logic (variables and optional blocks)"
+
+#: app/templates/admin.html:117
+msgid "Zutatenname - immer vorhanden"
+msgstr "Ingredient name - always present"
+
+#: app/templates/admin.html:118
+msgid "Menge + Einheit - immer vorhanden"
+msgstr "Amount + unit - always present"
+
+#: app/templates/admin.html:119
+#, fuzzy
+msgid "Zubereitungshinweis oder Eigenschaft, z. B. \"gerieben\", \"reif\" - oft leer"
+msgstr "Prep note, e.g. \"grated\" - often empty"
+
+#: app/templates/admin.html:120
+msgid "Alternativ-Zutat - oft leer"
+msgstr "Alternative ingredient - often empty"
+
+#: app/templates/admin.html:122
+#, fuzzy
+msgid "Text in eckigen Klammern (inkl. aller darin enthaltenen Platzhalter) faellt komplett weg, sobald auch nur einer der darin enthaltenen Platzhalter leer ist."
+msgstr "Text inside square brackets (including any placeholders within it) is dropped entirely as soon as any one of the enclosed placeholders is empty. Example:"
+
+#: app/templates/admin.html:127 app/templates/admin.html:162
+#: app/templates/admin.html:197
+msgid "Auf Vorlage zuruecksetzen"
+msgstr "Reset to template"
+
+#: app/templates/admin.html:130 app/templates/admin.html:165
+#: app/templates/admin.html:200
+msgid "Fruehere Version laden..."
+msgstr "Load earlier version..."
+
+#: app/templates/admin.html:135 app/templates/admin.html:170
+#: app/templates/admin.html:205
+msgid "Laden"
+msgstr "Load"
+
+#: app/templates/admin.html:139 app/templates/admin.html:174
+#: app/templates/admin.html:209
+msgid "Versionshinweis (optional)"
+msgstr "Version note (optional)"
+
+#: app/templates/admin.html:140
+msgid "z.B. Menge nach Details verschoben"
+msgstr "e.g. moved amount after details"
+
+#: app/templates/admin.html:150
+msgid "Extraktions-Prompt"
+msgstr "Extraction prompt"
+
+#: app/templates/admin.html:151
+msgid "Wird genutzt, wenn keine passende Schema.org-Syntax auf der Quellseite gefunden wurde."
+msgstr "Used when no matching Schema.org syntax was found on the source page."
+
+#: app/templates/admin.html:153 app/templates/admin.html:186
+msgid "Variablen"
+msgstr "Variables"
+
+#: app/templates/admin.html:155
+msgid "Die eingegebene Rezept-URL"
+msgstr "The entered recipe URL"
+
+#: app/templates/admin.html:156
+msgid "Bereinigter Seiteninhalt (Text ohne Nav/Ads/Skripte)"
+msgstr "Cleaned page content (text without nav/ads/scripts)"
+
+#: app/templates/admin.html:175
+msgid "z.B. Praeziser bei Mengenangaben"
+msgstr "e.g. more precise with quantities"
+
+#: app/templates/admin.html:183
+msgid "Anreicherungs-Prompt (Übersetzung + Zutaten-Alternativen)"
+msgstr "Enrichment prompt (translation + ingredient alternatives)"
+
+#: app/templates/admin.html:184
+msgid "Laeuft immer, auch wenn Quelle und Zielsprache identisch sind (Alternativen-Check ist sprachunabhaengig)."
+msgstr "Always runs, even when source and target language are the same (the alternatives check is language-independent)."
+
+#: app/templates/admin.html:188
+msgid "Zielsprache, wie auf der Startseite gewaehlt (z. B. \"Deutsch\")"
+msgstr "Target language, as chosen on the home page (e.g. \"German\")"
+
+#: app/templates/admin.html:189
+msgid "Rezepttitel, Originalsprache"
+msgstr "Recipe title, original language"
+
+#: app/templates/admin.html:190
+msgid "Zutatenliste, Original, eine pro Zeile"
+msgstr "Ingredient list, original, one per line"
+
+#: app/templates/admin.html:191
+msgid "Zubereitungsschritte, Original, nummeriert"
+msgstr "Preparation steps, original, numbered"
+
+#: app/templates/admin.html:210
+msgid "z.B. Details-Erkennung verbessert"
+msgstr "e.g. improved details detection"
+
+#: app/templates/admin.html:236
+msgid "aktuell, nicht in Liste - bitte neu waehlen"
+msgstr "current, not in list - please choose again"
+
+#: app/templates/admin.html:237
+msgid "keine Liste geladen"
+msgstr "no list loaded"
+
+#: app/templates/base.html:205 app/templates/index.html:2
+msgid "Neues Rezept"
+msgstr "New Recipe"
+
+#: app/templates/base.html:206 app/templates/history.html:2
+#: app/templates/history.html:4
+msgid "Verlauf"
+msgstr "History"
+
+#: app/templates/history.html:6
+msgid "XWiki-Abgleich gerade nicht verfuegbar - Status koennte veraltet sein."
+msgstr "XWiki sync currently unavailable - status may be outdated."
+
+#: app/templates/history.html:9
+msgid "Noch keine Importe."
+msgstr "No imports yet."
+
+#: app/templates/history.html:12
+msgid "Zeit"
+msgstr "Time"
+
+#: app/templates/history.html:12 app/templates/review.html:37
+msgid "Titel"
+msgstr "Title"
+
+#: app/templates/history.html:12
+msgid "Status"
+msgstr "Status"
+
+#: app/templates/history.html:12
+msgid "Link"
+msgstr "Link"
+
+#: app/templates/history.html:19
+msgid "geloescht (nicht mehr in XWiki)"
+msgstr "deleted (no longer in XWiki)"
+
+#: app/templates/history.html:25
+msgid "öffnen"
+msgstr "open"
+
+#: app/templates/index.html:5
+msgid "Rezept-URL eingeben. Fremdsprachige Rezepte werden automatisch in die Zielsprache uebersetzt, unuebliche Zutaten erhalten Alternativvorschlaege (Asia-Markt/Metro). Vor dem Import kannst du alles pruefen und bearbeiten."
+msgstr "Enter a recipe URL. Recipes in other languages are automatically translated into the target language, uncommon ingredients get alternative suggestions (Asian grocery/wholesale). You can review and edit everything before import."
+
+#: app/templates/index.html:8
+msgid "Rezept-URL"
+msgstr "Recipe URL"
+
+#: app/templates/index.html:11
+msgid "Zielsprache"
+msgstr "Target language"
+
+#: app/templates/index.html:27
+msgid "Freitext, die Liste ist nur eine Tipphilfe. Letzte Auswahl wird gemerkt."
+msgstr "Free text, the list is just a typing aid. Last choice is remembered."
+
+#: app/templates/index.html:30
+msgid "Rezept extrahieren"
+msgstr "Extract recipe"
+
+#: app/templates/review.html:2
+msgid "Rezept pruefen"
+msgstr "Review recipe"
+
+#: app/templates/review.html:29
+msgid "Quelle"
+msgstr "Source"
+
+#: app/templates/review.html:30
+msgid "Extraktion"
+msgstr "Extraction"
+
+#: app/templates/review.html:30
+msgid "JSON-LD (strukturierte Seitendaten)"
+msgstr "JSON-LD (structured page data)"
+
+#: app/templates/review.html:30
+msgid "KI-Extraktion"
+msgstr "AI extraction"
+
+#: app/templates/review.html:40
+msgid "Zutaten"
+msgstr "Ingredients"
+
+#: app/templates/review.html:43
+msgid "Original"
+msgstr "Original"
+
+#: app/templates/review.html:48
+msgid "Name"
+msgstr "Name"
+
+#: app/templates/review.html:52
+msgid "Details"
+msgstr "Details"
+
+#: app/templates/review.html:53
+#, fuzzy
+msgid "gerieben, reif ..."
+msgstr "grated, chopped ..."
+
+#: app/templates/review.html:56
+msgid "Menge"
+msgstr "Amount"
+
+#: app/templates/review.html:62
+msgid "Alternative"
+msgstr "Alternative"
+
+#: app/templates/review.html:69
+msgid "Zubereitung"
+msgstr "Instructions"
+
+#: app/templates/review.html:72
+#, python-format
+msgid "Schritt %(n)s"
+msgstr "Step %(n)s"
+
+#: app/templates/review.html:77
+msgid "Import"
+msgstr "Import"
+
+#: app/templates/review.html:78
+msgid "Seitenname (Slug)"
+msgstr "Page name (slug)"
+
+#: app/templates/review.html:81
+msgid "Hinweis: Es existiert bereits eine Seite mit diesem Titel - automatisch durchnummeriert."
+msgstr "Note: a page with this title already exists - automatically numbered."
+
+#: app/templates/review.html:83
+#, fuzzy
+msgid "Manuelle Aenderung moeglich - bei Kollision ohne \"Ueberschreiben\" wird automatisch neu durchnummeriert."
+msgstr "Already pre-filled collision-free (duplicates are numbered automatically). You can edit it manually - on collision without \"Overwrite\" it will be renumbered automatically."
+
+#: app/templates/review.html:88
+msgid "Vorhandene Seite ueberschreiben"
+msgstr "Overwrite existing page"
+
+#: app/templates/review.html:93
+msgid "In XWiki importieren"
+msgstr "Import into XWiki"
+
+#: app/templates/review.html:94
+msgid "Abbrechen"
+msgstr "Cancel"
+
+#~ msgid "Braucht einen als Docker Secret hinterlegten API-Key fuer den Anbieter (siehe unten)."
+#~ msgstr "Needs an API key stored as a Docker secret for the provider (see below)."
+
+#~ msgid "XWiki-Verbindung"
+#~ msgstr "XWiki connection"
+
+#~ msgid "Base-URL, Zielraum und Technical-User/Passwort sind hier bewusst nicht editierbar - liegen in"
+#~ msgstr "Base URL, target space, and technical user/password are deliberately not editable here - they live in"
+
+#~ msgid "bzw. als Docker Secrets, aendern sich selten und sollen nicht ueber die Web-UI manipulierbar sein."
+#~ msgstr "or as Docker secrets, change rarely, and should not be modifiable via the web UI."
+
+#~ msgid "Aktuell konfiguriert"
+#~ msgstr "Currently configured"
+
+#~ msgid "Optionen haengen vom oben gewaehlten Anbieter ab. Liste per Klick auf \"Modell-Liste laden\" oben aktualisieren - API-Keys sind Docker Secrets, siehe"
+#~ msgstr "Options depend on the provider chosen above. Refresh the list by clicking \"Load model list\" above - API keys are Docker secrets, see"
+
+#~ msgid "wird bei leerem DETAILS zu nur \"Name\" statt \"Name, \"."
+#~ msgstr "becomes just \"Name\" instead of \"Name, \" when DETAILS is empty."
+
+#~ msgid "Zeilenformat"
+#~ msgstr "Line format"
+

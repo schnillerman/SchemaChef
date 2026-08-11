@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Einstellungen') }}{% endblock %}
+{% block body_class %}admin-page{% endblock %}
+{% block extra_style %}
+<style>
+  body.admin-page main { max-width: 1180px; }
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .admin-grid { grid-template-columns: 1fr; }
+  }
+  .xwiki-target-url {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--green-dark);
+    word-break: break-all;
+    margin: 0.3rem 0 0.4rem;
+  }
+  .version-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+  .btn-small {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  select.version-select {
+    width: auto;
+    max-width: 320px;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.5rem;
+  }
+  .settings-section {
+    margin-bottom: 2.6rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .settings-section:last-child { border-bottom: none; }
+  .settings-section .actions { margin-top: 1rem; }
+</style>
+{% endblock %}
+{% block content %}
+<h2>{{ _('Einstellungen') }}</h2>
+<p class="meta">
+  {{ _('Diese Seite ist nicht selbst abgesichert - Zugriffsschutz erfolgt ueber den vorgeschalteten Reverse Proxy (oauth2-proxy/Keycloak).') }}
+  {{ _('Jeder Bereich unten wird unabhaengig gespeichert - ein Klick auf "Speichern" wirkt nur auf diesen einen Bereich.') }}
+</p>
+
+<div class="admin-grid">
+
+<div>
+  <div class="settings-section">
+    <h3>{{ _('XWiki-Ziel') }}</h3>
+    <p class="xwiki-target-url">{{ xwiki_base }}/bin/view/{{ xwiki_target_space }}/</p>
+    <p class="meta">{{ _('Base-URL') }} (<code>XWIKI_BASE={{ xwiki_base }}</code>) {{ _('und Zielraum') }} (<code>XWIKI_TARGET_SPACE={{ xwiki_target_space }}</code>) {{ _('sind in') }} <code>compose.yaml</code> {{ _('definiert.') }}</p>
+  </div>
+
+  <div class="settings-section">
+    <h3>{{ _('LLM-Anbieter') }}</h3>
+    <form method="post">
+      <input type="hidden" name="section" value="llm">
+      <div class="field-row">
+        <div>
+          <label for="provider">{{ _('Aktiver Anbieter') }}</label>
+          <select id="provider" name="provider">
+            <option value="anthropic" {% if settings.provider == "anthropic" %}selected{% endif %}>Anthropic (Claude){% if not configured_providers.anthropic %} - {{ _('kein API-Key hinterlegt') }}{% endif %}</option>
+            <option value="openai" {% if settings.provider == "openai" %}selected{% endif %}>OpenAI (ChatGPT){% if not configured_providers.openai %} - {{ _('kein API-Key hinterlegt') }}{% endif %}</option>
+            <option value="gemini" {% if settings.provider == "gemini" %}selected{% endif %}>Google (Gemini){% if not configured_providers.gemini %} - {{ _('kein API-Key hinterlegt') }}{% endif %}</option>
+          </select>
+        </div>
+        <div class="help-col">
+          {{ _('API-Keys sind Docker Secrets') }} (<code>secrets/api_key_anthropic.txt</code> / <code>api_key_openai.txt</code> / <code>api_key_gemini.txt</code>) - {{ _('Aenderung braucht') }} <strong>{{ _('Rebuild + Recreate') }}</strong> (<code>docker compose up -d --build --force-recreate</code>), {{ _('da sich der Dateiinhalt im Image aendert.') }}
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div>
+          <label for="model">{{ _('Modell') }}</label>
+          {% set current_choices = model_choices.get(settings.provider, []) %}
+          <select id="model" name="model" data-current="{{ settings.model }}">
+            {% if settings.model not in current_choices %}
+            <option value="{{ settings.model }}" selected>{{ settings.model }} ({{ _('aktuell, nicht in geladener Liste') }})</option>
+            {% endif %}
+            {% for m in current_choices %}
+            <option value="{{ m }}" {% if m == settings.model %}selected{% endif %}>{{ m }}</option>
+            {% endfor %}
+          </select>
+          <div class="version-toolbar">
+            <button type="submit" form="refresh-models-form" class="btn-ghost btn-small">{{ _('Modell-Liste neu laden') }}</button>
+            <span class="meta" id="models_loaded_at_display">{{ _('zuletzt geladen am') }} {{ models_loaded_at.get(settings.provider) or _('noch nie') }}</span>
+          </div>
+        </div>
+        <div class="help-col">
+          {{ _('Wird beim Oeffnen dieser Seite automatisch fuer den aktiven Anbieter aktualisiert. Optionen haengen vom oben gewaehlten Anbieter ab.') }}
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit">{{ _('Speichern') }}</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="settings-section">
+    <h3>{{ _('Zutatenformat') }}</h3>
+    <p class="meta">{{ _('Wie eine Zutat auf der finalen Seite erscheint - Standard entspricht KitchenOwls manuellem Eingabeformat "Name, Menge".') }}</p>
+    <details class="varlegend">
+      <summary>{{ _('Template-Logik (Variablen und optionale Bausteine)') }}</summary>
+      <dl>
+        <dt>{{ '{{NAME}}' }}</dt><dd>{{ _('Zutatenname - immer vorhanden') }}</dd>
+        <dt>{{ '{{AMOUNT}}' }}</dt><dd>{{ _('Menge + Einheit - immer vorhanden') }}</dd>
+        <dt>{{ '{{DETAILS}}' }}</dt><dd>{{ _('Zubereitungshinweis oder Eigenschaft, z. B. "gerieben", "reif" - oft leer') }}</dd>
+        <dt>{{ '{{ALTERNATIVE}}' }}</dt><dd>{{ _('Alternativ-Zutat - oft leer') }}</dd>
+      </dl>
+      <p>{{ _('Text in eckigen Klammern (inkl. aller darin enthaltenen Platzhalter) faellt komplett weg, sobald auch nur einer der darin enthaltenen Platzhalter leer ist.') }}</p>
+    </details>
+    <form method="post">
+      <input type="hidden" name="section" value="ingredient_format">
+      <div class="version-toolbar">
+        <button type="button" class="btn-ghost btn-small" onclick="resetToDefault('ingredient_format')">{{ _('Auf Vorlage zuruecksetzen') }}</button>
+        {% if prompt_versions.ingredient_format %}
+        <select id="ingredient_format_version_select" class="version-select">
+          <option value="">{{ _('Fruehere Version laden...') }}</option>
+          {% for v in prompt_versions.ingredient_format %}
+          <option value="{{ v['id'] }}">{{ v['created_at']|replace(' ', ', ') }}{% if v['note'] %} - {{ v['note'] }}{% endif %}</option>
+          {% endfor %}
+        </select>
+        <button type="button" class="btn-ghost btn-small" onclick="loadVersion('ingredient_format')">{{ _('Laden') }}</button>
+        {% endif %}
+      </div>
+      <input type="text" id="ingredient_format" name="ingredient_format" value="{{ settings.ingredient_format }}">
+      <label for="ingredient_format_note" style="margin-top:0.5rem;">{{ _('Versionshinweis (optional)') }}</label>
+      <input type="text" id="ingredient_format_note" name="ingredient_format_note" placeholder="{{ _('z.B. Menge nach Details verschoben') }}">
+      <div class="actions">
+        <button type="submit">{{ _('Speichern') }}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div>
+  <div class="settings-section">
+    <h3>{{ _('Extraktions-Prompt') }}</h3>
+    <p class="meta">{{ _('Wird genutzt, wenn keine passende Schema.org-Syntax auf der Quellseite gefunden wurde.') }}</p>
+    <details class="varlegend">
+      <summary>{{ _('Variablen') }}</summary>
+      <dl>
+        <dt>{{ '{{URL}}' }}</dt><dd>{{ _('Die eingegebene Rezept-URL') }}</dd>
+        <dt>{{ '{{CONTENT}}' }}</dt><dd>{{ _('Bereinigter Seiteninhalt (Text ohne Nav/Ads/Skripte)') }}</dd>
+      </dl>
+    </details>
+    <form method="post">
+      <input type="hidden" name="section" value="extract_prompt">
+      <div class="version-toolbar">
+        <button type="button" class="btn-ghost btn-small" onclick="resetToDefault('extract_prompt')">{{ _('Auf Vorlage zuruecksetzen') }}</button>
+        {% if prompt_versions.extract_prompt %}
+        <select id="extract_prompt_version_select" class="version-select">
+          <option value="">{{ _('Fruehere Version laden...') }}</option>
+          {% for v in prompt_versions.extract_prompt %}
+          <option value="{{ v['id'] }}">{{ v['created_at']|replace(' ', ', ') }}{% if v['note'] %} - {{ v['note'] }}{% endif %}</option>
+          {% endfor %}
+        </select>
+        <button type="button" class="btn-ghost btn-small" onclick="loadVersion('extract_prompt')">{{ _('Laden') }}</button>
+        {% endif %}
+      </div>
+      <textarea id="extract_prompt" name="extract_prompt" rows="8">{{ settings.extract_prompt }}</textarea>
+      <label for="extract_prompt_note" style="margin-top:0.5rem;">{{ _('Versionshinweis (optional)') }}</label>
+      <input type="text" id="extract_prompt_note" name="extract_prompt_note" placeholder="{{ _('z.B. Praeziser bei Mengenangaben') }}">
+      <div class="actions">
+        <button type="submit">{{ _('Speichern') }}</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="settings-section">
+    <h3>{{ _('Anreicherungs-Prompt (Übersetzung + Zutaten-Alternativen)') }}</h3>
+    <p class="meta">{{ _('Laeuft immer, auch wenn Quelle und Zielsprache identisch sind (Alternativen-Check ist sprachunabhaengig).') }}</p>
+    <details class="varlegend">
+      <summary>{{ _('Variablen') }}</summary>
+      <dl>
+        <dt>{{ '{{TARGET_LANGUAGE}}' }}</dt><dd>{{ _('Zielsprache, wie auf der Startseite gewaehlt (z. B. "Deutsch")') }}</dd>
+        <dt>{{ '{{TITLE}}' }}</dt><dd>{{ _('Rezepttitel, Originalsprache') }}</dd>
+        <dt>{{ '{{INGREDIENTS}}' }}</dt><dd>{{ _('Zutatenliste, Original, eine pro Zeile') }}</dd>
+        <dt>{{ '{{STEPS}}' }}</dt><dd>{{ _('Zubereitungsschritte, Original, nummeriert') }}</dd>
+      </dl>
+    </details>
+    <form method="post">
+      <input type="hidden" name="section" value="enrich_prompt">
+      <div class="version-toolbar">
+        <button type="button" class="btn-ghost btn-small" onclick="resetToDefault('enrich_prompt')">{{ _('Auf Vorlage zuruecksetzen') }}</button>
+        {% if prompt_versions.enrich_prompt %}
+        <select id="enrich_prompt_version_select" class="version-select">
+          <option value="">{{ _('Fruehere Version laden...') }}</option>
+          {% for v in prompt_versions.enrich_prompt %}
+          <option value="{{ v['id'] }}">{{ v['created_at']|replace(' ', ', ') }}{% if v['note'] %} - {{ v['note'] }}{% endif %}</option>
+          {% endfor %}
+        </select>
+        <button type="button" class="btn-ghost btn-small" onclick="loadVersion('enrich_prompt')">{{ _('Laden') }}</button>
+        {% endif %}
+      </div>
+      <textarea id="enrich_prompt" name="enrich_prompt" rows="11">{{ settings.enrich_prompt }}</textarea>
+      <label for="enrich_prompt_note" style="margin-top:0.5rem;">{{ _('Versionshinweis (optional)') }}</label>
+      <input type="text" id="enrich_prompt_note" name="enrich_prompt_note" placeholder="{{ _('z.B. Details-Erkennung verbessert') }}">
+      <div class="actions">
+        <button type="submit">{{ _('Speichern') }}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</div>
+
+<form id="refresh-models-form" method="post" action="{{ url_for('refresh_models') }}"></form>
+
+<script id="model-choices-data" type="application/json">{{ model_choices_json | safe }}</script>
+<script id="models-loaded-at-data" type="application/json">{{ models_loaded_at | tojson }}</script>
+<script id="default-templates-data" type="application/json">{{ default_templates | tojson }}</script>
+<script id="prompt-versions-data" type="application/json">{{ prompt_versions_json | safe }}</script>
+<script>
+(function () {
+  var choices = JSON.parse(document.getElementById('model-choices-data').textContent);
+  var loadedAt = JSON.parse(document.getElementById('models-loaded-at-data').textContent);
+  var providerSelect = document.getElementById('provider');
+  var modelSelect = document.getElementById('model');
+  var loadedAtDisplay = document.getElementById('models_loaded_at_display');
+  var initialModel = modelSelect.getAttribute('data-current') || '';
+  var neverText = {{ _('noch nie')|tojson }};
+  var loadedText = {{ _('zuletzt geladen am')|tojson }};
+  var notInListText = {{ _('aktuell, nicht in Liste - bitte neu waehlen')|tojson }};
+  var noListText = {{ _('keine Liste geladen')|tojson }};
+
+  function rebuildModelOptions() {
+    var provider = providerSelect.value;
+    var options = choices[provider] || [];
+    var current = modelSelect.value || initialModel;
+    modelSelect.innerHTML = '';
+    var found = false;
+    options.forEach(function (m) {
+      var opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m;
+      if (m === current) { opt.selected = true; found = true; }
+      modelSelect.appendChild(opt);
+    });
+    if (!found) {
+      var opt = document.createElement('option');
+      opt.value = current;
+      opt.textContent = options.length ? current + ' (' + notInListText + ')' : current + ' (' + noListText + ')';
+      opt.selected = true;
+      modelSelect.insertBefore(opt, modelSelect.firstChild);
+    }
+    loadedAtDisplay.textContent = loadedText + ' ' + (loadedAt[provider] || neverText);
+  }
+
+  providerSelect.addEventListener('change', rebuildModelOptions);
+})();
+
+var DEFAULT_TEMPLATES = JSON.parse(document.getElementById('default-templates-data').textContent);
+var PROMPT_VERSIONS = JSON.parse(document.getElementById('prompt-versions-data').textContent);
+
+function resetToDefault(key) {
+  document.getElementById(key).value = DEFAULT_TEMPLATES[key];
+}
+function loadVersion(key) {
+  var select = document.getElementById(key + '_version_select');
+  if (!select || !select.value) return;
+  var content = PROMPT_VERSIONS[key] && PROMPT_VERSIONS[key][select.value];
+  if (content !== undefined) {
+    document.getElementById(key).value = content;
+  }
+}
+</script>
+{% endblock %}
