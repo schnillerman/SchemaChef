@@ -2,6 +2,9 @@
 
 SchemaChef converts recipes from any language into schema.org Recipe objects in a selectable target language and saves them to XWiki, ready for scraping.
 
+## Quick links
+- For detailed implementation notes, configuration examples, and troubleshooting, see docs/DETAILS.md (expanded translation of the German design notes).
+
 ## Requirements
 - Docker (container-based deployment)
 - XWiki instance with admin access (can be hosted anywhere)
@@ -28,11 +31,11 @@ SchemaChef converts recipes from any language into schema.org Recipe objects in 
 ## Templates
 - Templates are edited and managed in the Web UI and persisted in the application database.
 - Template example (KitchenOwl style):
-  - `{{INGREDIENT}}[, {{AMOUNT}}]` — square brackets denote an optional segment which will be omitted if the variable inside is empty. Variables (e.g., `INGREDIENT`, `AMOUNT`) are pre-filled by the AI.
+  - `{{INGREDIENT}}[, {{AMOUNT}}]` — square brackets denote an optional segment which will be omitted if the variable inside is empty. Variables (e.g., `INGREDIENT`, `AMOUNT`) are pre-filled by the extractor.
 
 ## XWiki integration
 - The app saves generated Recipe pages to XWiki.
-- Authentication: basic auth (to be confirmed).
+- Authentication: basic auth.
 - The page content includes an embedded `{{MicroData-HTML}}` block so the page contains scraper-friendly schema.org microdata.
 
 ### Before:
@@ -56,11 +59,11 @@ E.g., see https://griechischesmagazin.de/briam-tourlou/
   </ul>
   <div itemprop="recipeInstructions">
     <p>Die Auberginen in mittlere Stücke schneiden, salzen, 20 Minuten ruhen lassen, mit kaltem Wasser abspülen und trocknen.</p>
-    <p>Legen Sie sie auf ein Backblech, das Sie mit Backpapier ausgelegt haben. Fetten Sie sie mit einem Pinsel mit Öl ein. Würzen Sie sie mit Salz und Pfeffer. Bei 200 °C backen, bis sie leicht gebräunt sind (ca. 20 Minuten).</p>
+    <p>Legen Sie sie auf ein Backblech, das Sie mit Backpapier ausgelegt haben. Fetten Sie sie mit einem Pinsel mit Öl ein. Würzen Sie sie mit Salz und Pfeffer. Bei 200 °C backen, bis sie leich[...]</p>
     <p>Zucchini und Kartoffeln schälen und in mittelgroße Stücke schneiden. Den Vorgang wie bei den Auberginen auch für die Zucchini wiederholen.</p>
     <p>Paprika waschen und in Stücke schneiden.</p>
     <p>Legen Sie die Kartoffeln auf ein Backblech. Fügen Sie 1–2 Esslöffel Öl, Salz und Pfeffer hinzu und mischen Sie alles. Bei 200 °C backen, bis sie leicht gebräunt sind.</p>
-    <p>Das Olivenöl in einen Topf geben und bei starker Hitze erhitzen. Zwiebeln und Knoblauch anbraten. Tomaten, Paprika und Petersilie hinzufügen. Die Hitze senken und 10 Minuten kochen lassen. Mit Salz und Pfeffer würzen.</p>
+    <p>Das Olivenöl in einen Topf geben und bei starker Hitze erhitzen. Zwiebeln und Knoblauch anbraten. Tomaten, Paprika und Petersilie hinzufügen. Die Hitze senken und 10 Minuten kochen lassen.[...]</p>
     <p>Das gesamte Gemüse und die Tomatensauce auf ein Backblech geben und gut mischen. Bei 180 °C ca. 40 Minuten backen.</p>
     <p>Möglicherweise müssen Sie während des Backens etwas heißes Wasser hinzufügen. Rühren Sie das Gericht vorsichtig um, um das Gemüse nicht zu zerdrücken.</p>
   </div>
@@ -88,3 +91,24 @@ E.g., see https://griechischesmagazin.de/briam-tourlou/
 
 ## Contributing
 Contributions welcome — please open an issue or a pull request.
+
+---
+
+## Expanded documentation
+A detailed, translated version of the German design notes, setup instructions, architecture decisions, and troubleshooting is available in docs/DETAILS.md. This file includes:
+
+- Full explanation of the two separate language settings (target recipe language vs. UI language)
+- Configuration levels (compose env, Docker secrets, DB/admin) and what requires a recreate/rebuild
+- Synology / Container Manager and reverse-proxy notes
+- Reasoning about APP_SECRET_KEY vs DB credentials and the choice of SQLite
+- XWiki Technical User guidance and how to create/test it
+- Pages/endpoints overview and admin behavior
+- Multi-provider API key policy and model selection details
+- Resource expectations (image size, RAM, workers)
+- Open issues and next steps
+- KitchenOwl ingredient format and template handling
+- Schema migrations
+- Duplicate handling and required attribution behavior
+- Troubleshooting steps for XWiki CAPTCHA/lockouts
+
+Please see docs/DETAILS.md for the full translated content.
