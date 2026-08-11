@@ -47,25 +47,25 @@ E.g., see https://griechischesmagazin.de/briam-tourlou/
 <div itemscope itemtype="https://schema.org/Recipe">
   <h1 itemprop="name">Briam-Tourlou</h1>
   <ul>
-    <li itemprop="recipeIngredient">Auberginen, 2-3</li>
+    <li itemprop="recipeIngredient">Eggplants, 2-3</li>
     <li itemprop="recipeIngredient">Zucchini, 2</li>
-    <li itemprop="recipeIngredient">Kartoffeln, 1 kg</li>
-    <li itemprop="recipeIngredient">Paprikaschoten, 3, rote oder grüne</li>
-    <li itemprop="recipeIngredient">Tomaten, 3, reif, gerieben</li>
-    <li itemprop="recipeIngredient">Olivenöl, 80 ml</li>
-    <li itemprop="recipeIngredient">Zwiebeln, 2, gehackt</li>
-    <li itemprop="recipeIngredient">Knoblauchzehen, 2, fein gehackt</li>
-    <li itemprop="recipeIngredient">Petersilie, 3-4 EL, fein gehackt</li>
+    <li itemprop="recipeIngredient">Potatoes, 1 kg</li>
+    <li itemprop="recipeIngredient">Bell peppers, 3, red or green</li>
+    <li itemprop="recipeIngredient">Tomatoes, 3, ripe, grated</li>
+    <li itemprop="recipeIngredient">Olive oil, 80 ml</li>
+    <li itemprop="recipeIngredient">Onions, 2, chopped</li>
+    <li itemprop="recipeIngredient">Garlic cloves, 2, finely chopped</li>
+    <li itemprop="recipeIngredient">Parsley, 3-4 tbsp, finely chopped</li>
   </ul>
   <div itemprop="recipeInstructions">
-    <p>Die Auberginen in mittlere Stücke schneiden, salzen, 20 Minuten ruhen lassen, mit kaltem Wasser abspülen und trocknen.</p>
-    <p>Legen Sie sie auf ein Backblech, das Sie mit Backpapier ausgelegt haben. Fetten Sie sie mit einem Pinsel mit Öl ein. Würzen Sie sie mit Salz und Pfeffer. Bei 200 °C backen, bis sie leich[...]</p>
-    <p>Zucchini und Kartoffeln schälen und in mittelgroße Stücke schneiden. Den Vorgang wie bei den Auberginen auch für die Zucchini wiederholen.</p>
-    <p>Paprika waschen und in Stücke schneiden.</p>
-    <p>Legen Sie die Kartoffeln auf ein Backblech. Fügen Sie 1–2 Esslöffel Öl, Salz und Pfeffer hinzu und mischen Sie alles. Bei 200 °C backen, bis sie leicht gebräunt sind.</p>
-    <p>Das Olivenöl in einen Topf geben und bei starker Hitze erhitzen. Zwiebeln und Knoblauch anbraten. Tomaten, Paprika und Petersilie hinzufügen. Die Hitze senken und 10 Minuten kochen lassen.[...]</p>
-    <p>Das gesamte Gemüse und die Tomatensauce auf ein Backblech geben und gut mischen. Bei 180 °C ca. 40 Minuten backen.</p>
-    <p>Möglicherweise müssen Sie während des Backens etwas heißes Wasser hinzufügen. Rühren Sie das Gericht vorsichtig um, um das Gemüse nicht zu zerdrücken.</p>
+    <p>Cut the eggplants into medium pieces, salt them, let rest for 20 minutes, rinse with cold water, and dry.</p>
+    <p>Place them on a baking sheet lined with parchment paper. Brush them with oil. Season with salt and pepper. Bake at 200°C until they are light[...]</p>
+    <p>Peel the zucchini and potatoes and cut into medium-sized pieces. Repeat the process for the zucchini as for the eggplants.</p>
+    <p>Wash the bell peppers and cut into pieces.</p>
+    <p>Place the potatoes on a baking sheet. Add 1-2 tablespoons of oil, salt, and pepper, and mix everything. Bake at 200°C until lightly browned.</p>
+    <p>Add the olive oil to a pot and heat over high heat. Sauté the onions and garlic. Add the tomatoes, bell peppers, and parsley. Reduce the heat and simmer for 10 minutes.[...]</p>
+    <p>Place all the vegetables and the tomato sauce on a baking sheet and mix well. Bake at 180°C for about 40 minutes.</p>
+    <p>You may need to add some hot water during baking. Stir the dish carefully so as not to crush the vegetables.</p>
   </div>
 </div>
 {{/html}}
