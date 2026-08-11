@@ -3,7 +3,7 @@
 SchemaChef converts recipes from any language into schema.org Recipe objects in a selectable target language and saves them to XWiki, ready for scraping.
 
 ## Quick links
-- For detailed implementation notes, configuration examples, and troubleshooting, see docs/DETAILS.md (expanded translation of the German design notes).
+- For detailed implementation notes, configuration examples, and troubleshooting, see [DETAILS.md](https://github.com/schnillerman/SchemaChef/blob/main/DETAILS.md).
 
 ## Requirements
 - Docker (container-based deployment)
@@ -14,7 +14,7 @@ SchemaChef converts recipes from any language into schema.org Recipe objects in 
 - Choose AI provider (Gemini, ChatGPT, Claude) and model in the Web UI
 - Least-changing configuration via environment variables and secret files; runtime parameters and templates in the Web UI
 - Input: any website URL containing a recipe
-- Output: an XWiki page containing an embedded {{MicroData-HTML}} block with schema.org Recipe microdata
+- Output: an XWiki page containing an embedded `{{MicroData-HTML}}` block with schema.org Recipe microdata
 - Template-driven ingredient & instruction formatting to improve scraper compatibility (example: KitchenOwl)
 
 ## How it works (high level)
