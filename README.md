@@ -30,8 +30,8 @@ SchemaChef converts recipes from any language into schema.org Recipe objects in 
 
 ## Templates
 - Templates are edited and managed in the Web UI and persisted in the application database.
-- Template example (KitchenOwl style):
-  - `{{INGREDIENT}}[, {{AMOUNT}}]` — square brackets denote an optional segment which will be omitted if the variable inside is empty. Variables (e.g., `INGREDIENT`, `AMOUNT`) are pre-filled by the extractor.
+- Template example (KitchenOwl style, actual default):
+  * `{{NAME}}[, {{DETAILS}}][, {{AMOUNT}}][ (or: {{ALTERNATIVE}})]` — square brackets denote an optional segment which is omitted entirely if any placeholder inside it is empty. Available variables: `NAME`, `AMOUNT` (always present), `DETAILS`, `ALTERNATIVE` (often empty).
 
 ## XWiki integration
 - The app saves generated Recipe pages to XWiki.
@@ -50,12 +50,12 @@ E.g., see https://griechischesmagazin.de/briam-tourlou/
     <li itemprop="recipeIngredient">Eggplants, 2-3</li>
     <li itemprop="recipeIngredient">Zucchini, 2</li>
     <li itemprop="recipeIngredient">Potatoes, 1 kg</li>
-    <li itemprop="recipeIngredient">Bell peppers, 3, red or green</li>
-    <li itemprop="recipeIngredient">Tomatoes, 3, ripe, grated</li>
+    <li itemprop="recipeIngredient">Bell peppers, red or green, 3</li>
+    <li itemprop="recipeIngredient">Tomatoes, ripe, grated, 3</li>
     <li itemprop="recipeIngredient">Olive oil, 80 ml</li>
-    <li itemprop="recipeIngredient">Onions, 2, chopped</li>
-    <li itemprop="recipeIngredient">Garlic cloves, 2, finely chopped</li>
-    <li itemprop="recipeIngredient">Parsley, 3-4 tbsp, finely chopped</li>
+    <li itemprop="recipeIngredient">Onions, chopped, 2</li>
+    <li itemprop="recipeIngredient">Garlic cloves, finely chopped, 2</li>
+    <li itemprop="recipeIngredient">Parsley, finely chopped, 3-4 tbsp</li>
   </ul>
   <div itemprop="recipeInstructions">
     <p>Cut the eggplants into medium pieces, salt them, let rest for 20 minutes, rinse with cold water, and dry.</p>
@@ -82,12 +82,10 @@ E.g., see https://griechischesmagazin.de/briam-tourlou/
 - MIT
 
 ## Roadmap / TODO
-- Add before/after example recipes (source → resulting XWiki page / JSON-LD)
-- Implement and document error handling and logging (conversion failures, rate limits, XWiki errors)
 - Add automated tests and CI config, plus badges
-- Confirm XWiki authentication method and provide configuration details (endpoint, page path rules)
-- Document Docker run / compose instructions and recommended deployment examples
+- Implement and document structured error handling and logging (conversion failures, rate limits, XWiki errors)
 - Expand supported languages and add Weblate pipeline
+- Add more before/after example recipes
 
 ## Contributing
 Contributions welcome — please open an issue or a pull request.
