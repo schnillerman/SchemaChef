@@ -94,8 +94,8 @@ Contributions welcome — please open an issue or a pull request.
 
 ---
 
-## Expanded documentation
-A detailed, translated version of the German design notes, setup instructions, architecture decisions, and troubleshooting is available in docs/DETAILS.md. This file includes:
+## Extended Documentation
+A detailed, translated version of the German design notes, setup instructions, architecture decisions, and troubleshooting is available in [DETAILS.md]([url](https://github.com/schnillerman/SchemaChef/blob/main/DETAILS.md)). This file includes:
 
 - Full explanation of the two separate language settings (target recipe language vs. UI language)
 - Configuration levels (compose env, Docker secrets, DB/admin) and what requires a recreate/rebuild
@@ -110,5 +110,3 @@ A detailed, translated version of the German design notes, setup instructions, a
 - Schema migrations
 - Duplicate handling and required attribution behavior
 - Troubleshooting steps for XWiki CAPTCHA/lockouts
-
-Please see docs/DETAILS.md for the full translated content.
