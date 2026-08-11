@@ -95,7 +95,7 @@ Contributions welcome — please open an issue or a pull request.
 ---
 
 ## Extended Documentation
-A detailed, translated version of the German design notes, setup instructions, architecture decisions, and troubleshooting is available in [DETAILS.md]([url](https://github.com/schnillerman/SchemaChef/blob/main/DETAILS.md)). This file includes:
+A detailed, translated version of the German design notes, setup instructions, architecture decisions, and troubleshooting is available in [DETAILS.md](https://github.com/schnillerman/SchemaChef/blob/main/DETAILS.md). This file includes:
 
 - Full explanation of the two separate language settings (target recipe language vs. UI language)
 - Configuration levels (compose env, Docker secrets, DB/admin) and what requires a recreate/rebuild
